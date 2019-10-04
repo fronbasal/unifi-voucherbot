@@ -62,6 +62,9 @@ if __name__ == '__main__':
     start_handler = CommandHandler("start", start)
     dispatcher.add_handler(start_handler)
 
+    generate_handler = CommandHandler("generate", generate)
+    dispatcher.add_handler(generate_handler)
+
     unknown_handler = MessageHandler(Filters.command, unknown)
     dispatcher.add_handler(unknown_handler)
 
