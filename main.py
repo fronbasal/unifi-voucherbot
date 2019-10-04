@@ -21,7 +21,8 @@ def start(update, context):
 
 
 def generate(update, context):
-    vouchers = unifi_api.generate_voucher(_("UNIFI_VOUCHER_EXPIRE"), _("UNIFI_VOUCHER_USAGES"))
+    while vouchers is None:
+        vouchers = unifi_api.generate_voucher(_("UNIFI_VOUCHER_EXPIRE"), _("UNIFI_VOUCHER_USAGES"))
     logging.log(logging.INFO, "User @" + update.effective_user.username + " generated a voucher.")
     for voucher in vouchers:
         context.bot.send_message(chat_id=update.message.chat_id,
