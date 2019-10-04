@@ -25,7 +25,7 @@ def generate(update, context):
     for voucher in vouchers:
         context.bot.send_message(chat_id=update.message.chat_id,
                                  text="Congratulations! Your voucher has been generated.\n" +
-                                      f"Please use the voucher `{voucher['code']}` to log in to the WiFi.")
+                                      "Please use the voucher `" + voucher['code'] + "` to log in to the WiFi.")
 
 
 def unknown(update, context):
@@ -46,17 +46,18 @@ if __name__ == '__main__':
     logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', level=logging.INFO)
 
     token = _("TELEGRAM_TOKEN")
-    logging.log(logging.INFO, f"Using Telegram token {token}.")
+    logging.log(logging.INFO, f"Using Telegram token " + token)
 
     unifi_api = Unifi(_("UNIFI_USERNAME"), _("UNIFI_PASSWORD"), _("UNIFI_URL"),
                       _("UNIFI_SITE"))
+    logging.log(logging.INFO, "Connected to Unifi API")
 
     bot = telegram.Bot(token)
 
     updater = Updater(token=token, use_context=True)
     dispatcher = updater.dispatcher
 
-    logging.log(logging.INFO, f"Logged in as {bot.username}!")
+    logging.log(logging.INFO, f"Logged in as " + bot.username)
 
     start_handler = CommandHandler("start", start)
     dispatcher.add_handler(start_handler)
