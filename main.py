@@ -25,7 +25,10 @@ def generate(update, context):
     for voucher in vouchers:
         context.bot.send_message(chat_id=update.message.chat_id,
                                  text="Congratulations! Your voucher has been generated.\n" +
-                                      "Please use the voucher `" + voucher['code'] + "` to log in to the WiFi.")
+                                      "Please use the voucher " + voucher['code'] + " to log in to the WiFi.\n" +
+                                      "The voucher is valid for " +
+                                      _("UNIFI_VOUCHER_EXPIRE") + " minutes and can be used "
+                                      + _("UNIFI_VOUCHER_USAGES") + " times.")
 
 
 def unknown(update, context):
